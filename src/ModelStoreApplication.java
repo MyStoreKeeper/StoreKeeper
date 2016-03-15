@@ -6,7 +6,7 @@ public class ModelStoreApplication {
 		// TODO Auto-generated method stub
 		LoginWindow w = new LoginWindow(); 
 	    w.setVisible(true);
-	    System.out.println("");
+	    System.out.println("Test Print");
 	}
 
 }
