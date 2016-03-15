@@ -1,5 +1,11 @@
 package objects;
 
+/**
+ * 
+ * @author Premraj M
+ *
+ */
+
 public class Member extends Customer{
 	
 	private int point;
