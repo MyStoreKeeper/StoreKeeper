@@ -34,4 +34,10 @@ public class DataHandler {
 	public void initData(){
 		
 	}
+	public void nnnnnn() {
+		System.out.println("ggggg");
+	}
+
+	
+	
 }

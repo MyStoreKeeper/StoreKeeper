@@ -4,6 +4,12 @@ import javax.swing.JFrame;
 
 import controller.DataHandler;
 
+/**
+ * 
+ * @author Premraj M
+ *
+ */
+
 public class LoginWindow extends JFrame {
 	
 	public LoginWindow() 
@@ -16,5 +22,7 @@ public class LoginWindow extends JFrame {
 	      
 	      //init DataHandler , then call data by DataHandler.data
 	      DataHandler.initDataHandler();
+	      
+	      DataHandler.data.set
 	   } 
 }
