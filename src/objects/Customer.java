@@ -1,5 +1,11 @@
 package objects;
 
+/**
+ * 
+ * @author Wu
+ *
+ */
+
 public class Customer {
 	
 	private String name;

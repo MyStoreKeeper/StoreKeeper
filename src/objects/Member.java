@@ -10,8 +10,9 @@ public class Member extends Customer{
 	
 	private int point;
 	
-	public Member(String name,String memberID) {
+	public Member(String name,String memberID, int point) {
 		super(name, memberID);
+		this.point=point;
 	}
 
 	public int getPoint() {
