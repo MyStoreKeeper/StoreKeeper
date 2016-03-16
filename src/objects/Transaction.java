@@ -11,8 +11,16 @@ import java.util.ArrayList;
 public class Transaction  {
 	
 	private Transaction_Item aTransaction;
+	private ArrayList<Transaction_Item> generateTxn;
 	
-	ArrayList<Transaction_Item> generateTxn= new ArrayList<Transaction_Item>();
+	
+	public ArrayList<Transaction_Item> getTxn(){
+		return generateTxn;
+	}
+	
+	public void setTxn(ArrayList<Transaction_Item> generateTxn){
+		this.generateTxn=generateTxn;
+	}
 	
 	
 	public Transaction_Item getaTransaction() {
