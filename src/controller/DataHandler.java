@@ -27,6 +27,19 @@ public class DataHandler {
 		return memberList;
 	}
 
+	public void addMember(String name,String id){
+		Member m = new Member(name,id);
+		memberList.add(m);
+	}
+	
+	public void removeMember(String id){
+		for(int i=0; i<memberList.size(); i++){
+			if(memberList.get(i).getMemberID().equals(id)){
+				memberList.remove(i);
+			}
+		}
+	}
+	
 	public void setMemberList(ArrayList<Member> memberList) {
 		this.memberList = memberList;
 	}
