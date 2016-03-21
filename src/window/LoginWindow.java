@@ -22,5 +22,10 @@ public class LoginWindow extends JFrame {
 	      
 	      //init DataHandler , then call data by DataHandler.data
 	      DataHandler.initDataHandler();
+<<<<<<< HEAD
+=======
+	      
+	      
+>>>>>>> origin/master
 	   } 
 }
