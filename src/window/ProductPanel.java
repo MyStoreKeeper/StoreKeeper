@@ -36,8 +36,9 @@ public class ProductPanel extends JPanel{
 	
 	public ProductPanel(MainManageWindow win){
 	this.win = win;
-	refresh();
+	//refresh();
 	setLayout(null);
+	list.setMultipleMode(false);
 	label.setBounds(57, 32, 90, 14);
 	this.add(label);
 	list.setBounds(33, 52, 200, 250);
@@ -66,7 +67,7 @@ public class ProductPanel extends JPanel{
 	}
 	
 	public void addButton(){
-		AddProductDialog apd = new AddProductDialog();
+		AddProductDialog apd = new AddProductDialog(win);
 	}
 	
 	public Product getSelectedProduct(){
@@ -92,6 +93,13 @@ public class ProductPanel extends JPanel{
 		
 	}
 	public void refresh(){
+		if(win.getProducts() != null){
+		current_products_list = win.getProducts();
+		list.removeAll();
+		for(Product product : current_products_list){
+			list.add(product.getProductName()+" - "+product.getBriefDescription());
+		}
+		}
 	}
 
 }

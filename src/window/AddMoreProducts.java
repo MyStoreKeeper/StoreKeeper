@@ -10,16 +10,16 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class confirmDialog extends JDialog{
+public class AddMoreProducts extends JDialog{
 	MainManageWindow win;
-	JPanel panel;
+	JPanel panel = new JPanel();
 	JButton yes;
 	JButton no;
 	JLabel label;
 	
-	public confirmDialog(MainManageWindow win,Object obj){
+	public AddMoreProducts(MainManageWindow win){
 		this.win = win;
-		createFormPanel(obj);
+		createFormPanel();
         addWindowListener(new WindowAdapter() {
            public void windowClosing(WindowEvent windowEvent){
               dispose();
@@ -27,27 +27,25 @@ public class confirmDialog extends JDialog{
         });
 	}
 	
-	public void createFormPanel(Object obj){
-		panel = new JPanel();
-		label = new JLabel("Are you sure you want to remove this?");
-		label.setBounds(24, 26, 225, 14);
+	public void createFormPanel(){
+		label = new JLabel("Do you wish to continue adding more products?");
+		label.setBounds(24, 26, 280, 14);
 		yes = new JButton("Yes");
 		yes.setBounds(60, 51, 60, 23);
 		no = new JButton("No");
 		no.setBounds(130, 51, 60, 23);
-		panel.setLayout(null);
 		panel.add(label);
 		panel.add(yes);
         panel.add(no);
         getContentPane().add(panel);
-        setTitle("Confirm Remove");
-        setSize(300,150);
+        setTitle("Add Products");
+        setSize(330,150);
         setVisible(true);
         
 		yes.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					performOkAction(obj);
+					performOkAction();
 			}
 			});
 		no.addActionListener(new ActionListener(){
@@ -58,27 +56,9 @@ public class confirmDialog extends JDialog{
 			});
 	}
 	
-	public void performOkAction(Object obj){
-		if(obj instanceof MemberPanel){
-			win.removeSelectedMember();
-			dispose();
-		}
-		if(obj instanceof ProductPanel){
-			win.removeSelectedProduct();
-			dispose();
-		}
-		if(obj instanceof CategoryPanel){
-			win.removeSelectedCategory();
-			dispose();
-		}
-		if(obj instanceof VendorPanel){
-			win.removeSelectedVendorFromCategory();
-			dispose();
-		}
-		if(obj instanceof DiscountPanel){
-			win.removeSelectedDiscount();
+	public void performOkAction(){
+		AddProductDialog apd = new AddProductDialog(win);
 			dispose();
 		}
 
 	}
-}

@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class AddCategoryDialog extends JDialog {
+	MainManageWindow win;
 	JPanel new_panel;
 	JButton ok;
 	JButton cancel;
@@ -21,7 +23,8 @@ public class AddCategoryDialog extends JDialog {
 	ArrayList<JTextField> listOfVendorNames = new ArrayList<JTextField>();
 	ArrayList<JTextField> listOfVendorDesc = new ArrayList<JTextField>();
 
-	public AddCategoryDialog() {
+	public AddCategoryDialog(MainManageWindow win) {
+		this.win = win;
 		createFormPanel();
         addWindowListener(new WindowAdapter() {
            public void windowClosing(WindowEvent windowEvent){
@@ -72,8 +75,7 @@ public class AddCategoryDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				addVendor.setEnabled(false);
-				System.out.println("Enter add vendors");				
-				
+	
 				JLabel l_name = new JLabel("Vendor Name");
 				l_name.setBounds(15, 11, 80, 14);
 				new_panel.add(l_name);
@@ -113,7 +115,7 @@ public class AddCategoryDialog extends JDialog {
 		ok.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-					//performOkAction();
+					performOkAction();
 			}
 			});
 		cancel.addActionListener(new ActionListener(){
@@ -145,10 +147,31 @@ public class AddCategoryDialog extends JDialog {
 			}
 		});
 		
-		System.out.println("Added");
 		getContentPane().validate();
 		getContentPane().repaint();
-		System.out.println("Revalidated");
 				
+	}
+	public void performOkAction(){
+		String name = tf1.getText();
+		String code = tf2.getText();
+		if(win.checkCategory(code) == true){
+			JOptionPane.showMessageDialog(this,"Category Code already exists!!");
+		}
+	else{
+		System.out.println("Entered add category else");
+		win.addCategory(name, code);
+		if(listOfVendorNames.size() >0 && listOfVendorDesc.size() >0){
+			addVendorsToCategory(code);
+		}
+	}
+		dispose();
+	}
+		
+	public void addVendorsToCategory(String catCode){
+			for(int i =0;i<listOfVendorNames.size();i++){
+				String vName = listOfVendorNames.get(i).getText();
+				String vDesc = listOfVendorDesc.get(i).getText();
+				win.addVendorsToCategory(catCode,vName,vDesc);
+		}
 	}
 }

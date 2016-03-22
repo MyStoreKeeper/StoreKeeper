@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import objects.Category;
 import objects.Discount;
 import objects.Member;
 
@@ -37,15 +38,16 @@ public class DiscountPanel extends JPanel{
 	public DiscountPanel(MainManageWindow win){
 		this.win = win;
 		setLayout(null);
+		list.setMultipleMode(false);
 		label.setBounds(57, 32, 90, 14);
 		this.add(label);
-		list.setBounds(33, 52, 200, 250);
+		list.setBounds(33, 52, 257, 250);
 		this.add(list);
-		add.setBounds(263, 65, 80, 23);
+		add.setBounds(314, 65, 80, 23);
 		this.add(add);
-		remove.setBounds(263, 116, 80, 23);
+		remove.setBounds(314, 120, 80, 23);
 		this.add(remove);
-		modify.setBounds(263, 165, 80, 23);
+		modify.setBounds(314, 167, 80, 23);
 		this.add(modify);
 		add.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -65,7 +67,7 @@ public class DiscountPanel extends JPanel{
 	}
 	
 	public void addButton(){
-		AddDiscountDialog adisc = new AddDiscountDialog();
+		AddDiscountDialog adisc = new AddDiscountDialog(win);
 	}
 	
 	public Discount getSelectedDiscount(){
@@ -89,6 +91,16 @@ public class DiscountPanel extends JPanel{
 	}
 	public void modifyButton(){
 		
+	}
+	
+	public void refresh(){
+		if(win.getDiscounts() != null){
+		current_discounts_list = win.getDiscounts();
+		list.removeAll();
+		for(Discount discount : current_discounts_list){
+			list.add(discount.getDescription()+" FOR "+discount.getDiscountType()+" - "+discount.getPercentageDiscount()+"%");
+		}
+		}
 	}
 
 }

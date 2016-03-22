@@ -2,6 +2,11 @@ package window;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,13 +14,16 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AddDiscountDialog extends JDialog{
-	private JTextField tf_code;
+	
+	MainManageWindow win;
+	private JLabel tf_code;
 	private JTextField tf_desc;
 	private JTextField tf_val;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -23,7 +31,8 @@ public class AddDiscountDialog extends JDialog{
 	private JTextField tf_sd;
 	private JTextField tf_dur;
 	
-	public AddDiscountDialog() {
+	public AddDiscountDialog(MainManageWindow win) {
+		this.win = win;
 		createFormPanel();
         addWindowListener(new WindowAdapter() {
            public void windowClosing(WindowEvent windowEvent){
@@ -40,10 +49,10 @@ public class AddDiscountDialog extends JDialog{
 		lblNewLabel.setBounds(21, 11, 86, 14);
 		getContentPane().add(lblNewLabel);
 		
-		tf_code = new JTextField();
+		String code = "DIS-"+(getDiscountSize()+1);
+		tf_code = new JLabel(code);
 		tf_code.setBounds(136, 8, 86, 20);
 		getContentPane().add(tf_code);
-		tf_code.setColumns(10);
 		
 		JLabel lblDescription = new JLabel("Description");
 		lblDescription.setBounds(21, 47, 70, 14);
@@ -64,11 +73,13 @@ public class AddDiscountDialog extends JDialog{
 		tf_val.setColumns(10);
 		
 		JRadioButton rdbtnMember = new JRadioButton("MEMBER");
+		rdbtnMember.setActionCommand("Member");
 		buttonGroup.add(rdbtnMember);
 		rdbtnMember.setBounds(136, 119, 86, 23);
 		getContentPane().add(rdbtnMember);
 		
 		JRadioButton rdbtnAll = new JRadioButton("ALL");
+		rdbtnAll.setActionCommand("All");
 		buttonGroup.add(rdbtnAll);
 		rdbtnAll.setSelected(true);
 		rdbtnAll.setBounds(239, 119, 109, 23);
@@ -79,7 +90,7 @@ public class AddDiscountDialog extends JDialog{
 		getContentPane().add(lblApplicableFor);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(136, 194, 243, 61);
+		panel.setBounds(136, 195, 289, 60);
 		getContentPane().add(panel);
 		panel.setVisible(false);
 		panel.setLayout(null);
@@ -93,20 +104,29 @@ public class AddDiscountDialog extends JDialog{
 		panel.add(lblDuration);
 		
 		tf_sd = new JTextField();
-		tf_sd.setBounds(122, 8, 86, 20);
+		tf_sd.setBounds(100, 8, 86, 20);
 		panel.add(tf_sd);
 		tf_sd.setColumns(10);
 		
 		tf_dur = new JTextField();
-		tf_dur.setBounds(122, 33, 86, 20);
+		tf_dur.setBounds(100, 33, 86, 20);
 		panel.add(tf_dur);
 		tf_dur.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("(d-MMM-yyyy)");
+		lblNewLabel_1.setBounds(196, 11, 83, 14);
+		panel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("(In days)");
+		lblNewLabel_2.setBounds(196, 36, 83, 14);
+		panel.add(lblNewLabel_2);
 		
 		JLabel lblApplicablePeriod = new JLabel("Applicable Period");
 		lblApplicablePeriod.setBounds(21, 162, 100, 14);
 		getContentPane().add(lblApplicablePeriod);
 		
 		JRadioButton rdbtnAlways = new JRadioButton("ALWAYS");
+		rdbtnAlways.setActionCommand("Always");
 		buttonGroup_1.add(rdbtnAlways);
 		rdbtnAlways.setBounds(140, 158, 80, 23);
 		rdbtnAlways.setSelected(true);
@@ -119,6 +139,7 @@ public class AddDiscountDialog extends JDialog{
 			});
 		
 		JRadioButton rdbtnLimitedPeriod = new JRadioButton("LIMITED PERIOD");
+		rdbtnLimitedPeriod.setActionCommand("Limited");
 		buttonGroup_1.add(rdbtnLimitedPeriod);
 		rdbtnLimitedPeriod.setBounds(239, 158, 140, 23);
 		getContentPane().add(rdbtnLimitedPeriod);
@@ -130,12 +151,23 @@ public class AddDiscountDialog extends JDialog{
 			});
 		
 		JButton btnOk = new JButton("OK");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					performOkAction();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		btnOk.setBounds(123, 277, 56, 23);
 		getContentPane().add(btnOk);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
 		});
 		btnCancel.setBounds(220, 277, 90, 23);
@@ -143,5 +175,43 @@ public class AddDiscountDialog extends JDialog{
 						
         setSize(500,350);
         setVisible(true);
+	}
+	
+	public void performOkAction() throws ParseException{
+		String sd = "N/A";
+		int period = 0;
+		String code = tf_code.getText();
+		String desc = tf_desc.getText();
+		Double val = Double.parseDouble(tf_val.getText());
+		String type = buttonGroup.getSelection().getActionCommand();
+		String dur = buttonGroup_1.getSelection().getActionCommand();
+		if(dur.equals("Limited")){
+			sd = tf_sd.getText();
+			SimpleDateFormat ft = new SimpleDateFormat ("d-MMM-yyyy");
+			DateFormat ft1 = new SimpleDateFormat ("d-MMM-yyyy");
+			Date startDate = ft.parse(sd);
+			Date currentDate = new Date();
+			currentDate = ft.parse(ft1.format(currentDate));
+			period = Integer.parseInt(tf_dur.getText());
+			Calendar cal  = Calendar.getInstance();
+			cal.setTime(startDate);
+			cal.add(Calendar.DATE, period);
+			Date newDate = cal.getTime();
+			if(newDate.before(currentDate)){
+				JOptionPane.showMessageDialog(this,"Invalid Discount Period!");
+			}
+			else{
+				win.addDiscount(code,type,desc,sd,period,val);
+			}
+		}
+		else{
+			win.addDiscount(code,type,desc,sd,period,val);
+		}	
+		dispose();
+	}
+	
+	public int getDiscountSize(){
+		int size = win.getDiscounts().size();
+		return size;
 	}
 }

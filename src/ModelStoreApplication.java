@@ -1,11 +1,12 @@
 import window.LoginWindow;
 import window.MainManageWindow;
+import window.MainWindow;
 
 public class ModelStoreApplication {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		MainManageWindow mf = new MainManageWindow();
+		MainWindow mf = new MainWindow();
 		mf.setVisible(true);
 		//LoginWindow w = new LoginWindow(); 
 	    //w.setVisible(true);

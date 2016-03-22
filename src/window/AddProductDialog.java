@@ -13,21 +13,27 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import objects.Category;
+import objects.Product;
 
 public class AddProductDialog extends JDialog {
+	MainManageWindow win;
 	JPanel panel;
 	JButton ok;
 	JButton cancel;
 	JComboBox catList;
-	JTextField tf1_id,tf2_thres,tf3_price,tf4_desc,tf5_name,tf6_quan,tf7,tf8;
-	//ArrayList<Category> cat_list = new ArrayList<Category>();
-	String[] cat_list = {"MUG","CLO"};
+	JLabel prodId;
+	JTextField tf2_thres,tf3_price,tf4_desc,tf5_name,tf6_quan,tf7_order,tf8_limit;
+	ArrayList<Category> cat_list = new ArrayList<Category>();
+	String[] cat_list1 = new String[10];
 	
-	public AddProductDialog() {
+	public AddProductDialog(MainManageWindow win) {
+		this.win = win;
+		
 		createFormPanel();
         addWindowListener(new WindowAdapter() {
            public void windowClosing(WindowEvent windowEvent){
@@ -37,7 +43,8 @@ public class AddProductDialog extends JDialog {
 	}
 	
 	public void createFormPanel(){
-
+		
+		checkCategory();
 		panel = new JPanel();
 		JLabel l = new JLabel("Select Category");
 		l.setBounds(13, 8, 100, 14);
@@ -53,38 +60,45 @@ public class AddProductDialog extends JDialog {
 		l5.setBounds(13, 170, 95, 14);
 		JLabel l6 = new JLabel("Threshold");
 		l6.setBounds(13, 139, 95, 14);
-		tf1_id = new JTextField(10);
-		tf1_id.setBounds(115, 36, 86, 20);
+        JLabel l7 = new JLabel("Place Order Quantity");
+        l7.setBounds(10, 242, 123, 14);
+        panel.add(l7);
+        JLabel l8 = new JLabel("Limit");
+        l8.setBounds(13, 270, 46, 14);
+        panel.add(l8);
+        
+		prodId = new JLabel();
+		prodId.setBounds(141, 36, 86, 20);
 		
-		catList = new JComboBox(cat_list);
-		catList.setBounds(115, 5, 60, 20);
-		tf1_id.setText(catList.getSelectedItem().toString()+"/");
+		catList = new JComboBox(cat_list1);
+		catList.setBounds(141, 5, 60, 20);
+				
+		prodId.setText(getProductCode());
 		catList.addItemListener(new ItemListener(){
 	        public void itemStateChanged(ItemEvent ie){
-	          String str = (String)catList.getSelectedItem();
-	          tf1_id.setText(str+"/");
+	        	prodId.setText(getProductCode());
 	        }
 	      });
 		
 		tf2_thres = new JTextField(10);
-		tf2_thres.setBounds(115, 136, 86, 20);
+		tf2_thres.setBounds(141, 136, 86, 20);
 		tf3_price = new JTextField(10);
-		tf3_price.setBounds(115, 167, 86, 20);
+		tf3_price.setBounds(141, 167, 86, 20);
 		tf4_desc = new JTextField(10);
-		tf4_desc.setBounds(115, 105, 86, 20);
+		tf4_desc.setBounds(141, 105, 86, 20);
 		tf5_name = new JTextField(10);
-		tf5_name.setBounds(115, 67, 86, 20);
+		tf5_name.setBounds(141, 67, 86, 20);
 		tf6_quan = new JTextField(10);
-		tf6_quan.setBounds(115, 203, 86, 20);
+		tf6_quan.setBounds(141, 203, 86, 20);
 		ok = new JButton("Ok");
-		ok.setBounds(98, 247, 60, 23);
+		ok.setBounds(96, 315, 60, 23);
 		cancel = new JButton("Cancel");
-		cancel.setBounds(203, 247, 80, 23);
+		cancel.setBounds(191, 315, 80, 23);
 		panel.setLayout(null);
 		panel.add(l);
 		panel.add(catList);
 		panel.add(l1);
-		panel.add(tf1_id);
+		panel.add(prodId);
 		panel.add(l2);
 		panel.add(tf2_thres);
 		panel.add(l3);
@@ -99,7 +113,19 @@ public class AddProductDialog extends JDialog {
         panel.add(cancel);
         setTitle("Add New Product");
         getContentPane().add(panel);
-        setSize(400,320);
+        
+        tf7_order = new JTextField();
+        tf7_order.setBounds(141, 239, 86, 20);
+        panel.add(tf7_order);
+        tf7_order.setColumns(10);
+
+        
+        tf8_limit = new JTextField();
+        tf8_limit.setBounds(141, 270, 86, 20);
+        panel.add(tf8_limit);
+        tf8_limit.setColumns(10);
+        
+        setSize(400,400);
         setVisible(true);
         
 		ok.addActionListener(new ActionListener(){
@@ -116,15 +142,47 @@ public class AddProductDialog extends JDialog {
 			});
 	}
 
-
+	public void checkCategory(){
+		cat_list = win.getCategories();
+		if(cat_list.size() != 0){
+			for(int i=0; i<cat_list.size();i++){
+				String str = cat_list.get(i).getCode();
+				System.out.println("Print cat code: "+str);
+				cat_list1[i] = str;
+			}
+		}
+		else{
+			JOptionPane.showMessageDialog(this,"There is no category. Please proceed to add a category first.");
+			System.exit(1);
+		}
+	}
+	
+	public String getProductCode(){
+		String selectedCat = catList.getSelectedItem().toString();
+		String prodCode;
+		ArrayList<Product> productList = win.getProductsForCategory(selectedCat);
+		if(productList == null){
+			prodCode = selectedCat+"/1";		
+		}
+		else{
+			int prodSize = productList.size()+1;
+			prodCode = selectedCat+"/"+prodSize;
+		}
+		return prodCode;
+	}
+	
 	public void performOkAction(){
-		String id = tf1_id.getText();
+		String cat = catList.getSelectedItem().toString();
+		String id = prodId.getText();
 		int thres = Integer.parseInt(tf2_thres.getText());
 		double price = Double.parseDouble(tf3_price.getText());
 		String desc = tf4_desc.getText();
 		String name = tf5_name.getText();
 		int quan = Integer.parseInt(tf6_quan.getText());
-		//TO-DO
+		int placeOrder = Integer.parseInt(tf7_order.getText());
+		int limit = Integer.parseInt(tf8_limit.getText());
+		win.addProduct(cat,id,name,desc,quan,price,thres,placeOrder,limit);
+		AddMoreProducts p = new AddMoreProducts(win);
 		dispose();
 		}
 }

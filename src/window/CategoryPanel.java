@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import objects.Category;
+import objects.Member;
 import objects.Product;
 
 /**
@@ -36,7 +37,9 @@ public class CategoryPanel extends JPanel{
 	
 	public CategoryPanel(MainManageWindow win){
 		this.win = win;
+		//refresh();
 		setLayout(null);
+		list.setMultipleMode(false);
 		label.setBounds(57, 32, 90, 14);
 		this.add(label);
 		list.setBounds(33, 52, 200, 250);
@@ -65,7 +68,7 @@ public class CategoryPanel extends JPanel{
 	}
 	
 	public void addButton(){
-		AddCategoryDialog acd = new AddCategoryDialog();
+		AddCategoryDialog acd = new AddCategoryDialog(win);
 	}
 	
 	public Category getSelectedCategory(){
@@ -91,6 +94,13 @@ public class CategoryPanel extends JPanel{
 		
 	}
 	public void refresh(){
+		if(win.getCategories() != null){
+		current_category_list = win.getCategories();
+		list.removeAll();
+		for(Category category : current_category_list){
+			list.add(category.getName() +" - "+category.getCode());
+		}
+		}
 	}
 
 }
