@@ -1,5 +1,6 @@
 package objects;
 
+<<<<<<< Updated upstream
 /**
  * 
  * @author Premraj M
@@ -49,6 +50,14 @@ public class Transaction_Item {
 	public String getMemberID() {
 		return memberID;
 	}
+=======
+import java.util.ArrayList;
+
+public class Transaction_Item {
+public String cookie;
+public String transactionId;
+public ArrayList<Transaction> transactionList;
+>>>>>>> Stashed changes
 
 
 	public void setMemberID(String memberID) {
