@@ -73,6 +73,8 @@ public class InventoryWindow extends JFrame{
 	
 		public void refresh(){
 			current_products_list = DataHandler.data.getInventoryList();
+			for(int i=0; i<current_products_list.size(); i++){
+			}
 		}
 		
 }

@@ -30,7 +30,6 @@ public class MainManageWindow extends JFrame {
 	CategoryPanel categoryPanel = new CategoryPanel(this);
 	VendorPanel vendorPanel = new VendorPanel(this);
 	DiscountPanel discountPanel = new DiscountPanel(this);
-	ReportPanel reportPanel = new ReportPanel();
 	private final JButton btnNewButton = new JButton("Home");
 	
 	public MainManageWindow() 
