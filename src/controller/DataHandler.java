@@ -21,13 +21,28 @@ public class DataHandler {
 	private ArrayList<Discount> discountList = new ArrayList<Discount>();
 	private ArrayList<Category> categoryList = new ArrayList<Category>();
 	private ArrayList<Storekeeper> storekeeperList = new ArrayList<Storekeeper>();
-	private ArrayList<Transaction> transactionList;
+	private ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
 	private HashMap<String, ArrayList<Vendor>> vendorCategoryHashmap = new HashMap<String, ArrayList<Vendor>>();
+	
+	private String loggedInUser;
 	
 	public static DataHandler data;
 	
+	public DataHandler(){
+		
+	}
+	
 	public ArrayList<Member> getMemberList() {
 		return memberList;
+	}
+	
+	public Category getCategory(String catCode) {
+		for(Category c : categoryList){
+			if(c.getCode().equals(catCode)){
+				return c;
+			}
+		}
+		return null;
 	}
 	
 	public ArrayList<Product> getProductsForCategory(String cat_code) {
@@ -83,8 +98,8 @@ public class DataHandler {
 	}
 	
 	public void addProduct(String catCode,String productID, String productName, String briefDescription, int quantity, double price,
-			int thresholdLimit, int placeOrder, int limit){
-		Product p = new Product(productID,productName,briefDescription,quantity,price,thresholdLimit,placeOrder,limit);
+			int thresholdLimit, int placeOrder){
+		Product p = new Product(productID,productName,briefDescription,quantity,price,thresholdLimit,placeOrder);
 		productList.add(p);
 		addToCategoryProductMap(catCode,p);
 	}
@@ -99,6 +114,15 @@ public class DataHandler {
 		else{
 			catProducts.add(p);
 		}
+	}
+	
+	public boolean checkExistingMember(String id){
+		for(Member mem : memberList){
+			if(mem.getMemberID().equals(id)){
+				return true;
+			}
+		}
+		return false;	
 	}
 	
 	public void removeMember(Member m){
@@ -140,6 +164,11 @@ public class DataHandler {
 		return inventory;
 	}
 	
+	public void orderProduct(Product p){
+		int new_quan = p.getPlaceOrder()+p.getQuantity();
+		p.setQuantity(new_quan);
+	}
+	
 	public void setMemberList(ArrayList<Member> memberList) {
 		this.memberList = memberList;
 	}
@@ -176,10 +205,6 @@ public class DataHandler {
 		this.transactionList = transactionList;
 	}
 
-	public DataHandler() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static void initDataHandler(){
 		data = new DataHandler();
 	}
@@ -191,6 +216,69 @@ public class DataHandler {
 		System.out.println("ggggg");
 	}
 
+	//Signup -StoreKeeper
+
+	public void addStorekeeper(String username,String password){
+		
+		Storekeeper storekeeper = new Storekeeper(username, password);
+		storekeeperList.add(storekeeper);
+	}
+
+	public String getLoggedInUser(){
+		return loggedInUser;
+	}
+	public void setLoggedInUser(String username){
+		this.loggedInUser = username; 
+	}
 	
+	// Login -Check valid Store keeper
+	public boolean checkStorekeeper(String username, String password) {
+		// TODO Auto-generated method stub
+		int flag = 0;
+		for (int i=0;i<storekeeperList.size();i++) {
+			String un = storekeeperList.get(i).getName();
+			String pass = storekeeperList.get(i).getPassword();
+			
+			System.out.println("ppp" +un);
+			System.out.println("ppp"+pass);
+			if(username.equals(un) && password.equals(pass)){
+				flag++;
+			}	
+		}
+		if (flag != 0) {
+			setLoggedInUser(username);
+			System.out.println("matched!!");
+			return true;
+			
+		}
+		else{
+			return false;
+		}
+		
+	}
+	
+	// Signup - Avoid user duplication
+	public boolean checkDuplicateStorekeeper (String username, String password){
+		int flag = 0;
+		for (int i=0;i<storekeeperList.size();i++) {
+			String un = storekeeperList.get(i).getName();
+			String pass = storekeeperList.get(i).getPassword();
+			
+			System.out.println("ppp" +un);
+			System.out.println("ppp"+pass);
+			if(username.equals(un)){
+				flag++;
+			}	
+		}
+		if (flag != 0) {
+			System.out.println("New User!!");
+			return false;
+			
+		}
+		else{
+			return true;
+		}
+		
+	}
 	
 }

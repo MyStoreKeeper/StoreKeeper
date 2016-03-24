@@ -27,4 +27,14 @@ public class Category {
 		this.code=code;
 	}
 	
+	public boolean equals(Object category) {
+    	if (category instanceof Category) {
+    		Category cat = (Category) category;
+    		if (this.getName().equals(cat.getName()))
+    			if (this.getCode().equals(cat.getCode()))
+    				return true;
+    		else return false;
+    	}
+    	return false;
+    }
 }

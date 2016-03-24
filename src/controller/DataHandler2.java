@@ -23,7 +23,7 @@ import java.io.IOException;
 
 public class DataHandler2 {
 
-	private HashMap<String, ArrayList<Product>> categoryHashmap;
+	/*private HashMap<String, ArrayList<Product>> categoryHashmap;
 	private HashMap<String, ArrayList<Product>> transactionItemhashmap;
 	private ArrayList<Member> memberList;
 	private ArrayList<Discount> discountList;
@@ -160,6 +160,6 @@ public class DataHandler2 {
 		
 		
 		
-	}
+	}*/
 	
 }

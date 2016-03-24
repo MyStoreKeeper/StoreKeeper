@@ -7,19 +7,17 @@ package objects;
  */
 
 public class Product {
-<<<<<<< Updated upstream
+
 	private String productID;
 	private String productName;
 	private String briefDescription;
 	private int quantity;
 	private double price;
 	private int thresholdLimit;
-	private int placeOrder;
-	private int limit;
-	
+	private int placeOrder;	
 	
 	public Product(String productID, String productName, String briefDescription, int quantity, double price,
-			int thresholdLimit, int placeOrder, int limit) {
+			int thresholdLimit, int placeOrder) {
 		
 		this.productID = productID;
 		this.productName = productName;
@@ -28,7 +26,6 @@ public class Product {
 		this.price = price;
 		this.thresholdLimit = thresholdLimit;
 		this.placeOrder = placeOrder;
-		this.limit = limit;
 	}
 
 
@@ -69,33 +66,7 @@ public class Product {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-=======
-	public String productId;
-	public String productName;
-	public String productDescription;
-	public String quantity;
-	public String price;
-	public String barcodeNumber;
-	public String threshold;
-	public String orderQuantity;
-	
-	public Product(){}
-
-	public Product(String productId,String productName,String productDescription,String quantity,String price,String barcodeNumber,String threshold,String orderQuantity) {
-		this.productId=productId;
-		this.productName=productName;
-		this.productDescription=productDescription;
-		this.quantity=quantity;
-		this.price=price;
-		this.barcodeNumber=barcodeNumber;
-		this.threshold=threshold;
-		this.orderQuantity=orderQuantity;
-		// TODO Auto-generated constructor stub
->>>>>>> Stashed changes
 	}
-	
-
-
 	public double getPrice() {
 		return price;
 	}
@@ -125,14 +96,30 @@ public class Product {
 		this.placeOrder = placeOrder;
 	}
 
-
-	public int getLimit() {
-		return limit;
-	}
-
-
-	public void setLimit(int limit) {
-		this.limit = limit;
-	}
+	
+	@Override
+	/*public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		int id = Integer.parseInt(getProductID().substring(0, 4));
+		result = prime * result + id;
+		return result;
+	}*/
+	
+	public boolean equals(Object product) {
+    	if (product instanceof Product) {
+    		Product p = (Product) product;
+    		if (this.getProductID().equals(p.getProductID()))
+    			if (this.getBriefDescription().equals(p.getBriefDescription()))
+    				if(this.getPlaceOrder() == p.getPlaceOrder())
+    					if(this.getPrice() == p.getPrice())
+    						if(this.getProductName().equals(p.getProductName()))
+    							if(this.getQuantity() == p.getQuantity())
+    								if(this.getThresholdLimit() == p.getThresholdLimit())
+    									return true;
+    		else return false;
+    	}
+    	return false;
+    }
 		
 	}

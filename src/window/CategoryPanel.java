@@ -37,7 +37,7 @@ public class CategoryPanel extends JPanel{
 	
 	public CategoryPanel(MainManageWindow win){
 		this.win = win;
-		//refresh();
+		refresh();
 		setLayout(null);
 		list.setMultipleMode(false);
 		label.setBounds(57, 32, 90, 14);
@@ -94,13 +94,11 @@ public class CategoryPanel extends JPanel{
 		
 	}
 	public void refresh(){
-		if(win.getCategories() != null){
-		current_category_list = win.getCategories();
-		list.removeAll();
-		for(Category category : current_category_list){
-			list.add(category.getName() +" - "+category.getCode());
-		}
-		}
+	current_category_list = win.getCategories();
+	list.removeAll();
+	for(Category category : current_category_list){
+		list.add(category.getName() +" - "+category.getCode());
+	}
 	}
 
 }

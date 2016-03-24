@@ -32,6 +32,15 @@ public class Storekeeper {
 		this.password = password;
 	}
 	
-	
+	public boolean equals(Object storekeeper) {
+    	if (storekeeper instanceof Storekeeper){
+    		Storekeeper sk = (Storekeeper) storekeeper;
+    		if (this.getName().equals(sk.getName()))
+    			if (this.getPassword().equals(sk.getPassword()))
+    				return true;
+    		else return false;
+    	}
+    	return false;
+    }
 
 }

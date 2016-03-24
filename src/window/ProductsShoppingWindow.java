@@ -10,7 +10,7 @@ import objects.Transaction_Item;
 
 public class ProductsShoppingWindow extends JFrame {
 	
-	DataHandler2 data = new DataHandler2();
+	/*DataHandler2 data = new DataHandler2();
 	
 	public Product searchproductbyId(String Id){
 		data.loadcategoryHashmap();
@@ -28,6 +28,6 @@ public class ProductsShoppingWindow extends JFrame {
 		
 	
 		
-	}
+	}*/
 
 }

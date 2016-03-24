@@ -1,6 +1,5 @@
 package objects;
 
-<<<<<<< Updated upstream
 /**
  * 
  * @author Premraj M
@@ -50,41 +49,34 @@ public class Transaction_Item {
 	public String getMemberID() {
 		return memberID;
 	}
-=======
-import java.util.ArrayList;
-
-public class Transaction_Item {
-public String cookie;
-public String transactionId;
-public ArrayList<Transaction> transactionList;
->>>>>>> Stashed changes
-
-
-	public void setMemberID(String memberID) {
-		this.memberID = memberID;
-	}
-
-
+	
 	public int getQuantityPurchased() {
 		return quantityPurchased;
 	}
-
-
-	public void setQuantityPurchased(int quantityPurchased) {
-		this.quantityPurchased = quantityPurchased;
-	}
-
-
-	public String getDate() {
+	
+	public String getPurchaseDate() {
 		return date;
 	}
-
-
-	public void setDate(String date) {
-		this.date = date;
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + transactionID;
+		return result;
 	}
 	
-		
-	
+	public boolean equals(Object transactionItem) {
+    	if (transactionItem instanceof Transaction_Item){
+    		Transaction_Item item = (Transaction_Item) transactionItem;
+    		if (this.getMemberID().equals(item.getMemberID()))
+    			if (this.getProductID().equals(item.getProductID()))
+    				if(this.getQuantityPurchased() == item.getQuantityPurchased())
+    					if(this.getPurchaseDate().equals(item.getPurchaseDate()))
+    						if(this.getTransactionID() == item.getTransactionID())
+    							return true;
+    		else return false;
+    	}
+    	return false;
+    }
 }
-

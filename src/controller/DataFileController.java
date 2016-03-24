@@ -9,7 +9,7 @@ public class DataFileController {
 	public DataFileController() {
 		// TODO Auto-generated constructor stub
 	}
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		ProductsShoppingWindow PSW=new ProductsShoppingWindow();
 		Product product=new Product();
@@ -22,6 +22,6 @@ public class DataFileController {
 		
 		
 		
-	}
+	}*/
 
 }
