@@ -42,4 +42,14 @@ public class Vendor  {
 		this.description = description;
 	}
 	
+	public boolean equals(Object vendor) {
+    	if (vendor instanceof Vendor){
+    		Vendor v = (Vendor) vendor;
+    		if (this.getVendorName().equals(v.getVendorName()))
+    			if (this.getDescription().equals(v.getDescription()))
+    				return true;
+    		else return false;
+    	}
+    	return false;
+    }
 }

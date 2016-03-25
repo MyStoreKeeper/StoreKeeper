@@ -36,7 +36,7 @@ public class MemberPanel extends JPanel{
 	
 	public MemberPanel(MainManageWindow win){
 	this.win = win;
-	//refresh();
+	refresh();
 	setLayout(null);
 	list.setMultipleMode(false);
 	label.setBounds(57, 32, 90, 14);
@@ -94,12 +94,11 @@ public class MemberPanel extends JPanel{
 	}
 
 	public void refresh(){
-		if(win.getMembers() != null){
 		current_member_list = win.getMembers();
 		list.removeAll();
 		for(Member member : current_member_list){
 			list.add(member.getName());
 		}
-		}
+		
 		}
 }

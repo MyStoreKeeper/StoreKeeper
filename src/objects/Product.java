@@ -14,12 +14,10 @@ public class Product {
 	private int quantity;
 	private double price;
 	private int thresholdLimit;
-	private int placeOrder;
-	private int limit;
-	
+	private int placeOrder;	
 	
 	public Product(String productID, String productName, String briefDescription, int quantity, double price,
-			int thresholdLimit, int placeOrder, int limit) {
+			int thresholdLimit, int placeOrder) {
 		
 		this.productID = productID;
 		this.productName = productName;
@@ -28,7 +26,6 @@ public class Product {
 		this.price = price;
 		this.thresholdLimit = thresholdLimit;
 		this.placeOrder = placeOrder;
-		this.limit = limit;
 	}
 
 
@@ -69,11 +66,11 @@ public class Product {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	}
-	
-
-
 	public double getPrice() {
 		return price;
 	}
@@ -103,14 +100,30 @@ public class Product {
 		this.placeOrder = placeOrder;
 	}
 
-
-	public int getLimit() {
-		return limit;
-	}
-
-
-	public void setLimit(int limit) {
-		this.limit = limit;
-	}
+	
+	@Override
+	/*public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		int id = Integer.parseInt(getProductID().substring(0, 4));
+		result = prime * result + id;
+		return result;
+	}*/
+	
+	public boolean equals(Object product) {
+    	if (product instanceof Product) {
+    		Product p = (Product) product;
+    		if (this.getProductID().equals(p.getProductID()))
+    			if (this.getBriefDescription().equals(p.getBriefDescription()))
+    				if(this.getPlaceOrder() == p.getPlaceOrder())
+    					if(this.getPrice() == p.getPrice())
+    						if(this.getProductName().equals(p.getProductName()))
+    							if(this.getQuantity() == p.getQuantity())
+    								if(this.getThresholdLimit() == p.getThresholdLimit())
+    									return true;
+    		else return false;
+    	}
+    	return false;
+    }
 		
 	}

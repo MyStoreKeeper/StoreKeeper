@@ -27,9 +27,9 @@ public class AddProductDialog extends JDialog {
 	JButton cancel;
 	JComboBox catList;
 	JLabel prodId;
-	JTextField tf2_thres,tf3_price,tf4_desc,tf5_name,tf6_quan,tf7_order,tf8_limit;
+	JTextField tf2_thres,tf3_price,tf4_desc,tf5_name,tf6_quan,tf7_order;
 	ArrayList<Category> cat_list = new ArrayList<Category>();
-	String[] cat_list1 = new String[10];
+	String[] cat_list1;;
 	
 	public AddProductDialog(MainManageWindow win) {
 		this.win = win;
@@ -63,17 +63,15 @@ public class AddProductDialog extends JDialog {
         JLabel l7 = new JLabel("Place Order Quantity");
         l7.setBounds(10, 242, 123, 14);
         panel.add(l7);
-        JLabel l8 = new JLabel("Limit");
-        l8.setBounds(13, 270, 46, 14);
-        panel.add(l8);
         
 		prodId = new JLabel();
 		prodId.setBounds(141, 36, 86, 20);
 		
 		catList = new JComboBox(cat_list1);
+		catList.setSelectedIndex(-1);
 		catList.setBounds(141, 5, 60, 20);
 				
-		prodId.setText(getProductCode());
+		//prodId.setText(getProductCode());
 		catList.addItemListener(new ItemListener(){
 	        public void itemStateChanged(ItemEvent ie){
 	        	prodId.setText(getProductCode());
@@ -120,11 +118,6 @@ public class AddProductDialog extends JDialog {
         tf7_order.setColumns(10);
 
         
-        tf8_limit = new JTextField();
-        tf8_limit.setBounds(141, 270, 86, 20);
-        panel.add(tf8_limit);
-        tf8_limit.setColumns(10);
-        
         setSize(400,400);
         setVisible(true);
         
@@ -144,6 +137,7 @@ public class AddProductDialog extends JDialog {
 
 	public void checkCategory(){
 		cat_list = win.getCategories();
+		cat_list1 = new String[cat_list.size()];
 		if(cat_list.size() != 0){
 			for(int i=0; i<cat_list.size();i++){
 				String str = cat_list.get(i).getCode();
@@ -172,18 +166,32 @@ public class AddProductDialog extends JDialog {
 	}
 	
 	public void performOkAction(){
-		String cat = catList.getSelectedItem().toString();
-		String id = prodId.getText();
-		int thres = Integer.parseInt(tf2_thres.getText());
-		double price = Double.parseDouble(tf3_price.getText());
-		String desc = tf4_desc.getText();
-		String name = tf5_name.getText();
-		int quan = Integer.parseInt(tf6_quan.getText());
-		int placeOrder = Integer.parseInt(tf7_order.getText());
-		int limit = Integer.parseInt(tf8_limit.getText());
-		win.addProduct(cat,id,name,desc,quan,price,thres,placeOrder,limit);
-		AddMoreProducts p = new AddMoreProducts(win);
-		dispose();
+		if(!prodId.getText().isEmpty() && !tf2_thres.getText().isEmpty() && !tf3_price.getText().isEmpty()
+				&& !tf4_desc.getText().isEmpty()&& !tf5_name.getText().isEmpty() && !tf6_quan.getText().isEmpty() 
+				&& !tf7_order.getText().isEmpty()){
+			
+			String cat = catList.getSelectedItem().toString();
+			String id = prodId.getText();
+			int thres = Integer.parseInt(tf2_thres.getText());
+			double price = Double.parseDouble(tf3_price.getText());
+			String desc = tf4_desc.getText();
+			String name = tf5_name.getText();
+			int quan = Integer.parseInt(tf6_quan.getText());
+			int placeOrder = Integer.parseInt(tf7_order.getText());
+			win.addProduct(cat,id,name,desc,quan,price,thres,placeOrder);
+			int reply =JOptionPane.showConfirmDialog(this, "Want to continue adding more products?",
+					"Add More Products", JOptionPane.YES_NO_OPTION);
+			if(reply == JOptionPane.YES_OPTION){
+				AddProductDialog apd = new AddProductDialog(win);
+				dispose();
+				}
+			else{
+				dispose();
+			}	
+		}
+		else{
+			JOptionPane.showMessageDialog(this,"Please Enter All Details.");
+		}
 		}
 }
 

@@ -1,8 +1,13 @@
-<<<<<<< Updated upstream
-=======
+/CategoryTest.class
+/CustomerTest.class
+/DataHandlerTest.class
+/DiscountTest.class
+/MemberTest.class
 /ModelStoreApplication.class
+/ProductTest.class
+/StorekeeperTest.class
+/Transaction_ItemTest.class
+/VendorTest.class
 /controller/
 /objects/
->>>>>>> Stashed changes
 /window/
-/Files/

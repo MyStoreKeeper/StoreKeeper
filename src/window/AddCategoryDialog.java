@@ -158,20 +158,32 @@ public class AddCategoryDialog extends JDialog {
 			JOptionPane.showMessageDialog(this,"Category Code already exists!!");
 		}
 	else{
-		System.out.println("Entered add category else");
-		win.addCategory(name, code);
-		if(listOfVendorNames.size() >0 && listOfVendorDesc.size() >0){
-			addVendorsToCategory(code);
+		if(!name.isEmpty() && !code.isEmpty()){
+			if(code.length() != 3){
+				JOptionPane.showMessageDialog(this,"Code Category should be 3 letters.");
+			}
+			else{
+				win.addCategory(name, code);
+				if(listOfVendorNames.size() >0 && listOfVendorDesc.size() >0){
+					addVendorsToCategory(code);		
+			}
+				dispose();
+			}	
+		}
+		else{
+			JOptionPane.showMessageDialog(this,"Please Enter All Details.");
 		}
 	}
-		dispose();
+		
 	}
 		
 	public void addVendorsToCategory(String catCode){
 			for(int i =0;i<listOfVendorNames.size();i++){
 				String vName = listOfVendorNames.get(i).getText();
 				String vDesc = listOfVendorDesc.get(i).getText();
-				win.addVendorsToCategory(catCode,vName,vDesc);
+				if(!vName.equals("") && !vDesc.equals("")){
+					win.addVendorsToCategory(catCode,vName,vDesc);
+				}
 		}
 	}
 }

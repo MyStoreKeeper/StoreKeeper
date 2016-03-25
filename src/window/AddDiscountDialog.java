@@ -180,34 +180,46 @@ public class AddDiscountDialog extends JDialog{
 	public void performOkAction() throws ParseException{
 		String sd = "N/A";
 		int period = 0;
-		String code = tf_code.getText();
-		String desc = tf_desc.getText();
-		Double val = Double.parseDouble(tf_val.getText());
-		String type = buttonGroup.getSelection().getActionCommand();
-		String dur = buttonGroup_1.getSelection().getActionCommand();
-		if(dur.equals("Limited")){
-			sd = tf_sd.getText();
-			SimpleDateFormat ft = new SimpleDateFormat ("d-MMM-yyyy");
-			DateFormat ft1 = new SimpleDateFormat ("d-MMM-yyyy");
-			Date startDate = ft.parse(sd);
-			Date currentDate = new Date();
-			currentDate = ft.parse(ft1.format(currentDate));
-			period = Integer.parseInt(tf_dur.getText());
-			Calendar cal  = Calendar.getInstance();
-			cal.setTime(startDate);
-			cal.add(Calendar.DATE, period);
-			Date newDate = cal.getTime();
-			if(newDate.before(currentDate)){
-				JOptionPane.showMessageDialog(this,"Invalid Discount Period!");
+		if(!tf_code.getText().isEmpty() && !tf_desc.getText().isEmpty() && 
+				!tf_val.getText().isEmpty()){
+			String code = tf_code.getText();
+			String desc = tf_desc.getText();
+			Double val = Double.parseDouble(tf_val.getText());
+			String type = buttonGroup.getSelection().getActionCommand();
+			String dur = buttonGroup_1.getSelection().getActionCommand();
+			if(dur.equals("Limited")){
+				if(!tf_sd.getText().isEmpty() && !tf_dur.getText().isEmpty()){
+					sd = tf_sd.getText();
+					period = Integer.parseInt(tf_dur.getText());
+					SimpleDateFormat ft = new SimpleDateFormat ("d-MMM-yyyy");
+					DateFormat ft1 = new SimpleDateFormat ("d-MMM-yyyy");
+					Date startDate = ft.parse(sd);
+					Date currentDate = new Date();
+					currentDate = ft.parse(ft1.format(currentDate));
+					Calendar cal  = Calendar.getInstance();
+					cal.setTime(startDate);
+					cal.add(Calendar.DATE, period);
+					Date newDate = cal.getTime();
+					if(newDate.before(currentDate)){
+						JOptionPane.showMessageDialog(this,"Invalid Discount Period!");
+					}
+					else{
+						win.addDiscount(code,type,desc,sd,period,val);
+						dispose();
+					}
+				}
+				else{
+					JOptionPane.showMessageDialog(this,"Please Enter All Details.");
+				}
 			}
 			else{
 				win.addDiscount(code,type,desc,sd,period,val);
-			}
+				dispose();
+			}	
 		}
 		else{
-			win.addDiscount(code,type,desc,sd,period,val);
-		}	
-		dispose();
+			JOptionPane.showMessageDialog(this,"Please Enter All Details.");
+		}
 	}
 	
 	public int getDiscountSize(){

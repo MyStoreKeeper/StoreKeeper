@@ -39,7 +39,7 @@ public class VendorPanel extends JPanel{
 	
 	public VendorPanel(MainManageWindow win){
 	this.win = win;
-	//refresh();
+	refresh();
 	setLayout(null);
 	cat_list.setMultipleMode(false);
 	ven_list.setMultipleMode(false);
@@ -97,7 +97,7 @@ public class VendorPanel extends JPanel{
 	}
 	
 	public void addButton(){
-		if(current_category_list.isEmpty()){
+		if(current_category_list == null){
 			JOptionPane.showMessageDialog(this,"No Category present. Please proceed to add a category first.");
 		}
 		else{
@@ -156,15 +156,18 @@ public class VendorPanel extends JPanel{
 		for(Category category : current_category_list){
 			cat_list.add(category.getName() +" - "+category.getCode());
 		}
+
 	}
+	
 	public void refreshVendors(){
 		ven_list.removeAll();
 		Category c = getSelectedCategory();
 		if(c != null){
-			System.out.println("Code selected: "+c.getCode());
 			current_vendor_list = win.getVendorsOfCategory(c.getCode());
-			for(Vendor vendor : current_vendor_list){
-				ven_list.add(vendor.getVendorName());
+			if(current_vendor_list != null){
+				for(Vendor vendor : current_vendor_list){
+					ven_list.add(vendor.getVendorName());
+				}
 			}
 		}
 		

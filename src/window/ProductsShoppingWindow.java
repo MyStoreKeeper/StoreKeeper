@@ -35,6 +35,7 @@ import objects.Transaction_Item;
  */
 public class ProductsShoppingWindow extends JFrame {
 	
+<<<<<<< HEAD
 	   DataHandler2 data;
 	   private JFrame mainFrame;
 	   private JLabel headerLabel;
@@ -54,6 +55,9 @@ public class ProductsShoppingWindow extends JFrame {
 	JButton btn2 = new JButton("Product Lookup");
 	JButton btn3 = new JButton("Add to Cart");
 	JButton btn4 = new JButton("Proceed to cart");
+=======
+	/*DataHandler2 data = new DataHandler2();
+>>>>>>> origin/master
 	
 	
 public ProductsShoppingWindow() throws IOException {
@@ -272,7 +276,7 @@ public ProductsShoppingWindow() throws IOException {
 		
 		
 		
-	}
+	}*/
 
 	public Product searchproductbyId(String Id){
 		Product product=null;

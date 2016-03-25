@@ -28,6 +28,7 @@ import objects.Product;
 import objects.Transaction_Item;
 
 public class ProductDetailWindow extends JFrame {
+<<<<<<< HEAD
 	DataHandler2 data;
 	
 	   private JFrame mainFrame;
@@ -190,6 +191,12 @@ public class ProductDetailWindow extends JFrame {
 			data.addproducttoTransaction(t.transactionID,t.memberID,t.TransactionItemshashmap.get(id),id,dateFormat.format(date));
 		}
 	}
+=======
+	//public void loadProducts(transactionId){};
+	//public void deleteProduct(productId){};
+	//public void modifyQuantity(productId,newQuantity){};
+	//public void checkStock(){};
+>>>>>>> origin/master
 	
 	
 	

@@ -37,6 +37,7 @@ public class DiscountPanel extends JPanel{
 	
 	public DiscountPanel(MainManageWindow win){
 		this.win = win;
+		refresh();
 		setLayout(null);
 		list.setMultipleMode(false);
 		label.setBounds(57, 32, 90, 14);
@@ -94,12 +95,10 @@ public class DiscountPanel extends JPanel{
 	}
 	
 	public void refresh(){
-		if(win.getDiscounts() != null){
 		current_discounts_list = win.getDiscounts();
 		list.removeAll();
 		for(Discount discount : current_discounts_list){
 			list.add(discount.getDescription()+" FOR "+discount.getDiscountType()+" - "+discount.getPercentageDiscount()+"%");
-		}
 		}
 	}
 

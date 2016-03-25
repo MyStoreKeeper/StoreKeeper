@@ -36,7 +36,7 @@ import java.time.LocalDate;
 
 public class DataHandler2 {
 
-	private HashMap<String, ArrayList<Product>> categoryHashmap;
+	/*private HashMap<String, ArrayList<Product>> categoryHashmap;
 	private HashMap<String, ArrayList<Product>> transactionItemhashmap;
 	ArrayList<Member> memberList;
 	public HashMap<String, ArrayList<Product>> getCategoryHashmap() {
@@ -305,7 +305,7 @@ public Product searchproductbyCategory(String category,String Id){
 			discount=data.checkMaxMemberDiscount(t);
 		return discount;
 		
-	}
+	}*/
 	
 	
 	public double checkMaxGeneralDiscount(Transaction_Item t) throws ParseException{

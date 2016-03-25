@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,6 +16,9 @@ import objects.StoreKeeperSession;
 import objects.Storekeeper;
 import objects.Transaction_Item;
 import window.BillWindow;
+=======
+import controller.DataHandler;
+>>>>>>> origin/master
 import window.LoginWindow;
 import window.MainManageWindow;
 import window.MainWindow;
@@ -48,6 +52,17 @@ public static void main(String[] args) throws IOException, ParseException {
 	//ProductDetailWindow PSS=new ProductDetailWindow(transaction_Item);
 		
 
+<<<<<<< HEAD
+=======
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//LoginWindow w = new LoginWindow(); 
+	    //w.setVisible(true);
+		DataHandler.initDataHandler();
+		LoginWindow login = new LoginWindow(DataHandler.data);
+		login.setVisible(true);
+	    System.out.println("Test Print");
+>>>>>>> origin/master
 	}
 	}
 

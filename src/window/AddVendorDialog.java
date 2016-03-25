@@ -4,10 +4,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -128,8 +128,13 @@ public class AddVendorDialog extends JDialog{
 }
 	public void getExistingVendors(String catCode){
 		ArrayList<Vendor> venList = win.getVendorsOfCategory(catCode);
-		for(Vendor v : venList){
-			vList.add(v.getVendorName());
+		if(venList != null){
+			for(Vendor v : venList){
+				vList.add(v.getVendorName());
+			}
+		}
+		else{
+			vList.add("--No Vendors Present--");
 		}
 	}
 	
@@ -163,8 +168,14 @@ public class AddVendorDialog extends JDialog{
 		for(int i=0;i<listOfVendorNames.size();i++){
 			String vName = listOfVendorNames.get(i).getText();
 			String vDesc = listOfVendorDesc.get(i).getText();
-			win.addVendorsToCategory(catCodeL.getText(), vName, vDesc);
-			dispose();
+			if(!vName.isEmpty() && !vDesc.isEmpty()){
+				win.addVendorsToCategory(catCodeL.getText(), vName, vDesc);
+				dispose();
+			}
+			else{
+				JOptionPane.showMessageDialog(this,"Please Enter All Details.");
+			}
+			
 		}
 		}
 }

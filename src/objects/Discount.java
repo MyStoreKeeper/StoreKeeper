@@ -81,5 +81,27 @@ public class Discount {
 		this.percentageDiscount = percentageDiscount;
 	}
 	
-
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		int id = Integer.parseInt(getDiscountCode().substring(0, 4));
+		result = prime * result + id;
+		return result;
+	}
+	
+	public boolean equals(Object discount) {
+    	if (discount instanceof Discount) {
+    		Discount dis = (Discount) discount;
+    		if (this.getDiscountCode().equals(dis.getDiscountCode()))
+    			if (this.getDescription().equals(dis.getDescription()))
+    				if(this.getDiscountType().equals(dis.getDiscountType()))
+    					if(this.getPercentageDiscount() == (dis.getPercentageDiscount()))
+    						if(this.getStartDate().equals(dis.startDate))
+    							if(this.getPeriodofDiscount() == dis.getPeriodofDiscount())
+    								return true;
+    		else return false;
+    	}
+    	return false;
+    }
 }

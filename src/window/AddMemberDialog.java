@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -78,8 +79,18 @@ public class AddMemberDialog extends JDialog {
 		String name = tf1.getText();
 		String id = tf2.getText();
 		if(!name.isEmpty() && !id.isEmpty()){
-			win.addMember(name,id);
-			dispose();
+			boolean value = win.checkExistingMember(id);
+			if(value == false){
+				win.addMember(name,id);
+				dispose();
+			}
+			else{
+				JOptionPane.showMessageDialog(this,"Member with this ID already exists.");
+				dispose();
+			}
+		}
+		else{
+			JOptionPane.showMessageDialog(this,"Please Enter All Details.");
 		}
 	}
 

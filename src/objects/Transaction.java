@@ -1,6 +1,9 @@
 package objects;
 
+<<<<<<< HEAD
 /*<<<<<<< Updated upstream
+=======
+>>>>>>> origin/master
 import java.util.ArrayList;
 
 /**
@@ -31,6 +34,7 @@ public class Transaction  {
 		this.aTransaction = aTransaction;
 	}
 		
+<<<<<<< HEAD
 
 =======*/
 import java.sql.Date;
@@ -86,4 +90,6 @@ public class Transaction {
 		this.date = date;
 	}
 
+=======
+>>>>>>> origin/master
 }
