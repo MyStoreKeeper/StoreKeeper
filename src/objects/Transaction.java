@@ -1,13 +1,13 @@
 package objects;
 
-<<<<<<< Updated upstream
+/*<<<<<<< Updated upstream
 import java.util.ArrayList;
 
 /**
  * 
  * @author Premraj M
  *
- */
+ 
 
 public class Transaction  {
 	
@@ -32,21 +32,22 @@ public class Transaction  {
 	}
 		
 
-=======
+=======*/
 import java.sql.Date;
 
 public class Transaction {
 
-	private String TransactionId;
+	private int TransactionId;
 	private String ProductId;
 	private String MemberId;
-	private String quantity;
+	private int quantity;
 	private String date; 
 	public Transaction() {
 		// TODO Auto-generated constructor stub
 	}
-	public Transaction(String TransactionId,String ProductId,String MemberId,String quantity,String date) {
+	public Transaction(int TransactionId,String ProductId,String MemberId,int quantity,String date) {
 		// TODO Auto-generated constructor stub
+		this.setTransactionId(TransactionId);
 		this.setDate(date);
 		this.setMemberId(MemberId);
 		this.setProductId(ProductId);
@@ -54,10 +55,10 @@ public class Transaction {
 		this.setDate(date);
 		
 	}
-	public String getTransactionId() {
+	public int getTransactionId() {
 		return TransactionId;
 	}
-	public void setTransactionId(String transactionId) {
+	public void setTransactionId(int transactionId) {
 		TransactionId = transactionId;
 	}
 	public String getProductId() {
@@ -72,11 +73,11 @@ public class Transaction {
 	public void setMemberId(String memberId) {
 		MemberId = memberId;
 	}
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
+	public void setQuantity(int quantity2) {
+		this.quantity = quantity2;
 	}
 	public String getDate() {
 		return date;
@@ -84,5 +85,5 @@ public class Transaction {
 	public void setDate(String date) {
 		this.date = date;
 	}
->>>>>>> Stashed changes
+
 }

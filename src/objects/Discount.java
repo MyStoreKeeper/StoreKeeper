@@ -8,19 +8,19 @@ package objects;
 
 public class Discount {
 	private String discountCode;
-	private String discountType;
+	
 	private String description;
 	private String startDate;
-	private int periodofDiscount;
+	private String periodofDiscount;
 	private double percentageDiscount;
 	
 
-	public Discount(String discountCode,String discountType, String description, 
-			String startDate,int periodofDiscount,
+	public Discount(String discountCode,String description, 
+			String startDate,String periodofDiscount,
 			double percentageDiscount) {
 		
 		this.discountCode=discountCode;
-		this.discountType=discountType;
+		
 		this.description=description;
 		this.percentageDiscount=percentageDiscount;
 		this.startDate=startDate;
@@ -39,14 +39,7 @@ public class Discount {
 	}
 
 
-	public String getDiscountType() {
-		return discountType;
-	}
 
-
-	public void setDiscountType(String discountType) {
-		this.discountType = discountType;
-	}
 
 
 	public String getDescription() {
@@ -69,12 +62,12 @@ public class Discount {
 	}
 
 
-	public int getPeriodofDiscount() {
+	public String getPeriodofDiscount() {
 		return periodofDiscount;
 	}
 
 
-	public void setPeriodofDiscount(int periodofDiscount) {
+	public void setPeriodofDiscount(String periodofDiscount) {
 		this.periodofDiscount = periodofDiscount;
 	}
 

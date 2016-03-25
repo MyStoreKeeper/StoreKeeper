@@ -7,7 +7,7 @@ package objects;
  */
 
 public class Product {
-<<<<<<< Updated upstream
+
 	private String productID;
 	private String productName;
 	private String briefDescription;
@@ -69,29 +69,7 @@ public class Product {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-=======
-	public String productId;
-	public String productName;
-	public String productDescription;
-	public String quantity;
-	public String price;
-	public String barcodeNumber;
-	public String threshold;
-	public String orderQuantity;
-	
-	public Product(){}
 
-	public Product(String productId,String productName,String productDescription,String quantity,String price,String barcodeNumber,String threshold,String orderQuantity) {
-		this.productId=productId;
-		this.productName=productName;
-		this.productDescription=productDescription;
-		this.quantity=quantity;
-		this.price=price;
-		this.barcodeNumber=barcodeNumber;
-		this.threshold=threshold;
-		this.orderQuantity=orderQuantity;
-		// TODO Auto-generated constructor stub
->>>>>>> Stashed changes
 	}
 	
 

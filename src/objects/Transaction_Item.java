@@ -1,63 +1,50 @@
 package objects;
 
-<<<<<<< Updated upstream
-/**
- * 
- * @author Premraj M
- *
- */
-
-public class Transaction_Item {
-	
-	
-	private int transactionID;
-	private String productID;
-	private String memberID;
-	private int quantityPurchased;
-	private String date;
-	
-	
-	public Transaction_Item(int transactionID, String productID, String memberID, int quantityPurchased, String date) {
-		
-		this.transactionID = transactionID;
-		this.productID = productID;
-		this.memberID = memberID;
-		this.quantityPurchased = quantityPurchased;
-		this.date = date;
-	}
-
-
-	public int getTransactionID() {
-		return transactionID;
-	}
-
-
-	public void setTransactionID(int transactionID) {
-		this.transactionID = transactionID;
-	}
-
-
-	public String getProductID() {
-		return productID;
-	}
-
-
-	public void setProductID(String productID) {
-		this.productID = productID;
-	}
-
-
-	public String getMemberID() {
-		return memberID;
-	}
-=======
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Transaction_Item {
-public String cookie;
-public String transactionId;
-public ArrayList<Transaction> transactionList;
->>>>>>> Stashed changes
+	
+	
+	public int transactionID;
+	
+	public String memberID;
+	
+	
+	public HashMap<String,Integer> TransactionItemshashmap;
+	
+	public int NumberofItemsinCart;
+	
+	public double totalCost;
+	
+	
+
+
+
+	public HashMap<String, Integer> getTransactionItemshashmap() {
+		return TransactionItemshashmap;
+	}
+
+
+	public void setTransactionItemshashmap(String id,int quantity) {
+		
+		this.TransactionItemshashmap.put(id, quantity);
+		}
+
+
+	public int getNumberofItemsinCart() {
+		return NumberofItemsinCart;
+	}
+
+
+	public void setNumberofItemsinCart(int numberofItemsinCart) {
+		this.NumberofItemsinCart = numberofItemsinCart;
+	}
+
+
+	public void setTransactionID(int transactionId2) {
+		this.transactionID = transactionId2;
+	}
 
 
 	public void setMemberID(String memberID) {
@@ -65,26 +52,23 @@ public ArrayList<Transaction> transactionList;
 	}
 
 
-	public int getQuantityPurchased() {
-		return quantityPurchased;
-	}
-
-
-	public void setQuantityPurchased(int quantityPurchased) {
-		this.quantityPurchased = quantityPurchased;
-	}
-
-
-	public String getDate() {
-		return date;
-	}
-
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-	
+	public Transaction_Item(int transactionId2, String memberID) {
+		super();
+		setTransactionID(transactionId2);
+		setMemberID(memberID);
+		this.TransactionItemshashmap=new HashMap<String, Integer>();
+		//setNumberofItemsinCart(numberofItemsinCart);
 		
+		//setTransactionItemshashmap(transactionItemshashmap);
+		
+		
+	}
+
+
+	
+ 
+
 	
 }
+
 

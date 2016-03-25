@@ -7,7 +7,7 @@ package objects;
  */
 public class Storekeeper {
 	
-	private String name;
+	public String name;
 	private String password;
 
 	public Storekeeper(String name,String password) {

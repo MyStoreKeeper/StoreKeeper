@@ -8,9 +8,10 @@ package objects;
 
 public class Customer {
 	
+	
 	private String name;
 	private String memberID;
-	
+	public Customer(){};
 	public Customer(String name,String memberID) {
 		this.name = name;
 		this.memberID = memberID;
