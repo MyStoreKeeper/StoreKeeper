@@ -12,12 +12,16 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.BorderLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import controller.DataHandler;
 import objects.Category;
@@ -260,9 +264,16 @@ public class ReportWindow extends JFrame {
     	//Register the event handler method
         search.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				getTransactionTable(tPanel1);
-			}
-			});
+				
+				if (astartDate.getText().equals("") || aendDate.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "Start Date and End Date field should not be blank"); 
+					
+				}else {
+				
+				    getTransactionTable(tPanel1);
+				}
+			
+			}});
 //  		table2.setFont(new Font("Georgia", Font.BOLD, 11));
 //  		table2.setModel(dtm2);
   		return tPanel;

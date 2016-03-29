@@ -14,9 +14,10 @@ public class Product {
 	private int quantity;
 	private double price;
 	private int thresholdLimit;
-	private int placeOrder;	
+	private int placeOrder;
+	private int barcode;
 	
-	public Product(String productID, String productName, String briefDescription, int quantity, double price,
+	public Product(String productID, String productName, String briefDescription, int quantity, double price,int barcode,
 			int thresholdLimit, int placeOrder) {
 		
 		this.productID = productID;
@@ -24,8 +25,18 @@ public class Product {
 		this.briefDescription = briefDescription;
 		this.quantity = quantity;
 		this.price = price;
+		this.barcode=barcode;
 		this.thresholdLimit = thresholdLimit;
 		this.placeOrder = placeOrder;
+	}
+	
+	public int getbarcode() {
+		return barcode;
+	}
+
+
+	public void setbarcode(int barcode) {
+		this.barcode = barcode;
 	}
 
 
@@ -66,10 +77,7 @@ public class Product {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 	}
 	public double getPrice() {
 		return price;
